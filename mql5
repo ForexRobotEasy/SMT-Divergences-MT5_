@@ -1,0 +1,77 @@
+mql5
+// SMT Divergences MT5 Indicator
+// Author: [Your Name]
+// Date: [Current Date]
+
+// Include necessary libraries and dependencies
+#include <Technical/Indicator/Indicators.mqh>
+
+// Define input parameters
+input string Pair1 = 'EURUSD'; // First currency pair
+input string Pair2 = 'GBPUSD'; // Second currency pair
+
+// Define global variables
+int indicatorHandle; // Handle for the SMT Divergences indicator
+
+// Define function to analyze price divergences between two currency pairs
+bool AnalyzeDivergences()
+{
+    // Get price data for both currency pairs
+    double[] prices1, prices2;
+    CopyClose(Pair1, PERIOD_CURRENT, 0, ArraySize(prices1), prices1);
+    CopyClose(Pair2, PERIOD_CURRENT, 0, ArraySize(prices2), prices2);
+
+    // Perform divergence analysis using your unique market analysis algorithm
+    // ...
+
+    // Return true if divergences are found, false otherwise
+    return true;
+}
+
+// Define OnInit() function
+int OnInit()
+{
+    // Create the SMT Divergences indicator
+    indicatorHandle = iCustom(NULL, 0, 'SMT Divergences', Pair1, Pair2);
+
+    // Check if the indicator is created successfully
+    if (indicatorHandle == INVALID_HANDLE)
+    {
+        Print('Failed to create the SMT Divergences indicator!');
+        return INIT_FAILED;
+    }
+
+    // Set up user-friendly interface for traders
+    // ...
+
+    return INIT_SUCCEEDED;
+}
+
+// Define OnDeinit() function
+void OnDeinit(const int reason)
+{
+    // Clean up and release any resources used by the indicator
+    IndicatorRelease(indicatorHandle);
+}
+
+// Define OnTick() function
+void OnTick()
+{
+    // Perform divergence analysis on each tick
+    if (AnalyzeDivergences())
+    {
+        // Take appropriate trading actions based on the identified divergences
+        // ...
+    }
+}
+
+// Define OnTester() function for backtesting purposes
+void OnTester()
+{
+    // Perform divergence analysis on historical data
+    if (AnalyzeDivergences())
+    {
+        // Record and analyze the test results
+        // ...
+    }
+}
